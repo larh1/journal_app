@@ -3,7 +3,7 @@
 <div class="d-flex">
     <!-- Sidebar -->
     <div class="col-4">
-        <Registro/>
+        <ListaRegistros />
     </div>
     <!-- Content -->
     <div class="col">
@@ -23,7 +23,7 @@ export default
     components:
     {
         Navbar: defineAsyncComponent(() => import("../components/Navbar.vue")),
-        Registro: defineAsyncComponent(() => import("../components/Registro.vue")),
+        ListaRegistros: defineAsyncComponent(() => import("../components/ListaRegistros.vue")),
     }
 }
 </script>

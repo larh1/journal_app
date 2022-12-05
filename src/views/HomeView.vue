@@ -16,7 +16,7 @@ export default
         {
             this.$router.push(
             {
-                name: "daybook"
+                name: "empty-entry"
             });
         },
     },
