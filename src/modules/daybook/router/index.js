@@ -8,12 +8,21 @@ export default
             /* webpackChunkName: "daybook" */
             "@/modules/daybook/layout/DayBookLayout.vue"),
         children: [
+            // Nada seleccionado
             {
                 path: "",
                 name: "empty-entry",
                 component: () => import(
                     /* webpackChunkName: "EmptyEntry" */
                     "@/modules/daybook/views/EmptySelected.vue"),
+            },
+            // Detalles
+            {
+                path:":id",
+                name:"entry",
+                component: () => import(
+                    /* webpackChunkName: "EmptyEntry" */
+                    "@/modules/daybook/views/EntryView.vue"),
             }
         ],
     }

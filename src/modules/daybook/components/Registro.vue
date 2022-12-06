@@ -1,5 +1,5 @@
 <template>
-<div class="registro-container pointer mb-3 p-2">
+<div class="registro-container pointer mb-3 p-2" @click="ShowEntry">
     <!-- titulo -->
     <div class="registro-titulo d-flex">
         <span class="text-success fw-bold fs-6">15</span>
@@ -15,7 +15,24 @@
 <script>
 export default
 {
-    name: "registro-component"
+    name: "registro-component",
+    methods:
+    {
+        /**
+         * Mostrar el registro seleccionado
+         */
+        ShowEntry()
+        {
+            this.$router.push(
+            {
+                name: "entry",
+                params:
+                {
+                    id: 5
+                }
+            })
+        }
+    }
 }
 </script>
 
@@ -28,8 +45,8 @@ export default
         background-color: lighten($color: gray, $amount: 45);
     }
 }
-.registro-description
-{
+
+.registro-description {
     font-size: 14px;
 }
 </style>
