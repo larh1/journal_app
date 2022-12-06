@@ -23,7 +23,7 @@
     <textarea class="form-control1" placeholder="Cuéntame algo"></textarea>
 </div>
 <!-- Fab -->
-<Fab icon="fa-save"/>
+<Fab icon="fa-save" />
 <!-- imagen -->
 <img class="img-thumbnail " src="https://images.unsplash.com/photo-1484591974057-265bb767ef71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80" alt="alt-picture">
 </template>
@@ -33,13 +33,48 @@ import
 {
     defineAsyncComponent
 }
-from '@vue/runtime-core'
+from 'vue'
+import
+{
+    mapGetters
+}
+from 'vuex';
 export default
 {
     name: "entry-view",
     components:
     {
         Fab: defineAsyncComponent(() => import("../components/Fab.vue"))
+    },
+    props:
+    {
+        // Id del Entry
+        id:
+        {
+            type: String,
+            required: true,
+        }
+    },
+    computed:
+    {
+        ...mapGetters("journal", ["getEntryById"]),
+    },
+    created()
+    {
+        console.error(this.id);
+        // Obtener Id seleccionado y cargar registro
+        this.LoadEntry();
+    },
+    methods:
+    {
+        /**
+         * Obtener el registro del Id actual
+         */
+        LoadEntry()
+        {
+            console.error(this.getEntryById(this.id))
+
+        }
     }
 }
 </script>

@@ -11,7 +11,12 @@ export const getEntriesByTerm = (state) => (term = "") =>
     return state.entries.filter(e => e.text.toLowerCase().includes(term));
 }
 
-export const getEntriesById = () =>
+/**
+ * Obtener el registro del Id ingresado
+ */
+export const getEntryById = (state) => (id) =>
 {
-
+    const entry = state.entries.find(r => r.id === id);
+    if (!entry) return;
+    return {...entry};
 }

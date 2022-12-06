@@ -18,11 +18,17 @@ export default
             },
             // Detalles
             {
-                path:":id",
-                name:"entry",
+                path: ":id",
+                name: "entry",
                 component: () => import(
                     /* webpackChunkName: "EmptyEntry" */
                     "@/modules/daybook/views/EntryView.vue"),
+                props: (route) =>
+                {
+                    return {
+                        id: route.params.id
+                    }
+                }
             }
         ],
     }
