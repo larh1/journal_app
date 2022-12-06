@@ -2,9 +2,9 @@
 <div class="entry-title d-flex justify-content-between p-2">
     <!-- titulo -->
     <div>
-        <span class="text-success fw-bold fs-2">15</span>
-        <span class="mx-1 fs-2">Nov</span>
-        <span class="mx-1 fs-3 fw-light">2022, Lunes</span>
+        <span class="text-success fw-bold fs-2">{{day}}</span>
+        <span class="mx-1 fs-2">{{month}}</span>
+        <span class="mx-1 fs-3 fw-light">{{year}}</span>
     </div>
     <div>
         <!-- Borrar -->
@@ -20,7 +20,7 @@
 <hr>
 <!-- Descripcion -->
 <div class="d-flex flex-column px-3 h-75">
-    <textarea class="form-control1" placeholder="Cuéntame algo"></textarea>
+    <textarea v-model="entry.text" class="form-control1" placeholder="Cuéntame algo"></textarea>
 </div>
 <!-- Fab -->
 <Fab icon="fa-save" />
@@ -39,6 +39,7 @@ import
     mapGetters
 }
 from 'vuex';
+import getDateYear from "../helpers/getDateYear";
 export default
 {
     name: "entry-view",
@@ -55,9 +56,28 @@ export default
             required: true,
         }
     },
+    data()
+    {
+        return {
+            entry:
+            {}
+        }
+    },
     computed:
     {
         ...mapGetters("journal", ["getEntryById"]),
+        day()
+        {
+            return getDateYear(this.entry.date).day
+        },
+        month()
+        {
+            return getDateYear(this.entry.date).month
+        },
+        year()
+        {
+            return getDateYear(this.entry.date).year
+        },
     },
     created()
     {
@@ -72,7 +92,12 @@ export default
          */
         LoadEntry()
         {
-            console.error(this.getEntryById(this.id))
+            const entry = this.getEntryById(this.id);
+            if (!entry) this.$router.push(
+            {
+                name: "empty-entry"
+            });
+            else this.entry = entry;
 
         }
     }
