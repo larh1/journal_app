@@ -2,20 +2,52 @@
 <div class="registro-container pointer mb-3 p-2" @click="ShowEntry">
     <!-- titulo -->
     <div class="registro-titulo d-flex">
-        <span class="text-success fw-bold fs-6">15</span>
-        <span class="mx-1 fs-6">Nov</span>
-        <span class="mx-1 fs-5 fw-light">2022, Lunes</span>
+        <span class="text-success fw-bold fs-6">{{day}}</span>
+        <span class="mx-1 fs-6">{{month}}</span>
+        <span class="mx-1 fs-5 fw-light">{{yearDay}}</span>
     </div>
-    <div class="registro-description">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis et perspiciatis dicta hic perferendis reprehenderit, expedita, tempore quisquam illo doloremque officia, fuga laboriosam in optio. Blanditiis recusandae consequuntur at aliquam.
-    </div>
+    <div class="registro-description"> {{shortText}}</div>
 </div>
 </template>
 
 <script>
+const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+const days = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
 export default
 {
     name: "registro-component",
+    props:
+    {
+        entry:
+        {
+            type: Object,
+            required: true,
+        }
+    },
+    computed:
+    {
+        shortText()
+        {
+            return (this.entry.text.length >= 130) ?
+                this.entry.text.substring(0, 130) + "..." :
+                this.entry.text;
+        },
+        day()
+        {
+            const date = new Date(this.entry.date);
+            return date.getDate();
+        },
+        month()
+        {
+            const date = new Date(this.entry.date);
+            return months[date.getMonth()];
+        },
+        yearDay()
+        {
+            const date = new Date(this.entry.date);
+            return `${date.getFullYear()},${days[date.getDay()]}`;
+        }
+    },
     methods:
     {
         /**
@@ -28,7 +60,7 @@ export default
                 name: "entry",
                 params:
                 {
-                    id: 5
+                    id: this.entry.id
                 }
             })
         }

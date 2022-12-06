@@ -5,8 +5,8 @@
         <input type="text" class="form-control" v-model="term" placeholder="Buscar...">
     </div>
     <div class="scroll-list">
-        <h4 :key="i" v-for="(r,i) in entriesByTerm">
-            <Registro />
+        <h4 :key="r.id" v-for="r in entriesByTerm">
+            <Registro :entry="r"/>
         </h4>
     </div>
 </div>
