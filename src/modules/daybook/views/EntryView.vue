@@ -79,9 +79,16 @@ export default
             return getDateYear(this.entry.date).year
         },
     },
+    watch:
+    {
+        // Obtener el nuevo registro al cambiar el Id (current,old)
+        id()
+        {
+            this.LoadEntry();
+        }
+    },
     created()
     {
-        console.error(this.id);
         // Obtener Id seleccionado y cargar registro
         this.LoadEntry();
     },

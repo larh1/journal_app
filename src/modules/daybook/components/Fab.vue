@@ -12,7 +12,7 @@ export default
     {
         icon:
         {
-            default: "fa-user",
+            default: "fa-plus",
             type: String
         }
     }
