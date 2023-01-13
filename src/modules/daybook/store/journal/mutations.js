@@ -1,6 +1,7 @@
-export const setEntries = () =>
+export const setEntries = (state,entries) =>
 {
-
+    state.entries = [...entries];
+    state.isLoading = false;
 }
 
 export const updateEntry = () =>
