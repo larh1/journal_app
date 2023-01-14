@@ -8,7 +8,7 @@
     </div>
     <div>
         <!-- Borrar -->
-        <button class="btn btn-danger btn-sm"> Borrar
+        <button v-if="entry.id" class="btn btn-danger btn-sm" @click="onDelete"> Borrar
             <i class="fas fa-trash-alt"></i>
         </button>
         <!-- Subir Foto -->
@@ -100,6 +100,7 @@ export default
          */
         ...mapActions("journal", ["updateEntry"]),
         ...mapActions("journal", ["createEntry"]),
+        ...mapActions("journal", ["deleteEntry"]),
         /**
          * Obtener el registro del Id actual
          */
@@ -123,6 +124,9 @@ export default
             }
         },
 
+        /**
+         * Guardar o actualizar el registro
+         */
         async saveEntry()
         {
             if (this.entry.id)
@@ -144,6 +148,18 @@ export default
                 });
 
             }
+        },
+
+        /**
+         * Borrar el registro actual
+         */
+        async onDelete()
+        {
+            await this.deleteEntry(this.entry)
+            this.$router.push(
+            {
+                name: "empty-entry"
+            })
         }
     }
 }

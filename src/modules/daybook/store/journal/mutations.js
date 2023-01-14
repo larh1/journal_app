@@ -15,3 +15,9 @@ export const createEntry = (state,entry) =>
 {
     state.entries.unshift(entry);
 }
+
+export const deleteEntry = (state,id) =>
+{
+    const idx=state.entries.map(r=>r.id).indexOf(id);
+    state.entries.splice(idx,1);
+}

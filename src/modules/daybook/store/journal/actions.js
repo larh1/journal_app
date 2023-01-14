@@ -30,7 +30,7 @@ export const updateEntry = async (context,entry) =>
 
 export const createEntry = async (context,entry) =>
 {
-    // Actualizar (menos el id)
+    // Guardar
     let data = {
         text: entry.text,
         date: entry.date,
@@ -44,3 +44,9 @@ export const createEntry = async (context,entry) =>
     return id;
 }
 
+export const deleteEntry = async (context,entry) =>
+{
+    // Eliminar
+    await journalApi.delete(`entries/${ entry.id }.json`);
+    context.commit("deleteEntry",entry.id);
+}
