@@ -23,7 +23,7 @@
     <textarea v-model="entry.text" class="form-control1" placeholder="Cuéntame algo"></textarea>
 </div>
 <!-- Fab -->
-<Fab icon="fa-save" />
+<Fab icon="fa-save" @click2="saveEntry" />
 <!-- imagen -->
 <img class="img-thumbnail " src="https://images.unsplash.com/photo-1484591974057-265bb767ef71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80" alt="alt-picture">
 </template>
@@ -36,6 +36,7 @@ import
 from 'vue'
 import
 {
+    mapActions,
     mapGetters
 }
 from 'vuex';
@@ -94,18 +95,55 @@ export default
     },
     methods:
     {
+        /*
+         * IMPORTANTE: Las Actions se llaman como Metodos
+         */
+        ...mapActions("journal", ["updateEntry"]),
+        ...mapActions("journal", ["createEntry"]),
         /**
          * Obtener el registro del Id actual
          */
         LoadEntry()
         {
-            const entry = this.getEntryById(this.id);
-            if (!entry) this.$router.push(
+            if (this.id == "new")
             {
-                name: "empty-entry"
-            });
-            else this.entry = entry;
+                this.entry = {
+                    text: "",
+                    date: new Date().getTime(),
+                }
+            }
+            else
+            {
+                const entry = this.getEntryById(this.id);
+                if (!entry) this.$router.push(
+                {
+                    name: "empty-entry"
+                });
+                else this.entry = entry;
+            }
+        },
 
+        async saveEntry()
+        {
+            if (this.entry.id)
+            {
+                // Actualizar
+                await this.updateEntry(this.entry);
+            }
+            else
+            {
+                // Registrar
+                const id = await this.createEntry(this.entry);
+                this.$router.push(
+                {
+                    name: "entry",
+                    params:
+                    {
+                        id
+                    }
+                });
+
+            }
         }
     }
 }

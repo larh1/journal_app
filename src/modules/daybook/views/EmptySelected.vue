@@ -4,7 +4,7 @@
     <h1 class="align-self-center">Seleccione un registro</h1>
 </div>
 <!-- FAB -->
-<Fab />
+<Fab @click="newEntry" />
 </template>
 
 <script>
@@ -19,6 +19,21 @@ export default
     components:
     {
         Fab: defineAsyncComponent(() => import("../components/Fab.vue"))
+    },
+    methods:
+    {
+        newEntry()
+        {
+            // Cambiar a ruta 'new'
+            this.$router.push(
+            {
+                name: "entry",
+                params:
+                {
+                    id: "new"
+                }
+            })
+        },
     }
 }
 </script>

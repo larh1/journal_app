@@ -4,9 +4,15 @@
     <div class="py-2 px-2">
         <input type="text" class="form-control" v-model="term" placeholder="Buscar...">
     </div>
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <button class="btn btn-primary" @click="$router.push({name:'entry',params:{id:'new'}})">
+            <i class="fas fa-plus"></i> Nuevo
+        </button>
+    </div>
+
     <div class="scroll-list">
         <h4 :key="r.id" v-for="r in entriesByTerm">
-            <Registro :entry="r"/>
+            <Registro :entry="r" />
         </h4>
     </div>
 </div>
