@@ -1,4 +1,5 @@
 import daybookRouter from "@/modules/daybook/router";
+import authRouter from "@/modules/auth/router";
 import { createRouter, createWebHashHistory } from "vue-router";
 
 import HomeView from "../views/HomeView.vue";
@@ -17,7 +18,11 @@ const routes = [
   {
     path: '/daybook',
     ...daybookRouter
-  }
+  },
+  {
+    path: '/auth',
+    ...authRouter
+  },
 ]
 
 const router = createRouter({
