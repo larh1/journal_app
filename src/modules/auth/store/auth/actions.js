@@ -20,7 +20,6 @@ export const createUser = async (context,user) =>
         return {ok: true}
     } catch (ex)
     {
-        console.error(ex.response.data.error);
-        return {ok: false,message: ex.response.data.error}
+        return {ok: false,message: ex.response.data.error.message}
     }
 }

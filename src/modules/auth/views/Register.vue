@@ -25,7 +25,12 @@ import
     ref
 }
 from 'vue';
-import useAuth from "@/modules/auth/composables/useAuth"
+import useAuth from "@/modules/auth/composables/useAuth";
+import
+{
+    useRouter
+}
+from "vue-router";
 export default
 {
     name: "auth-register",
@@ -35,6 +40,7 @@ export default
         {
             createuser
         } = useAuth();
+        const router = useRouter();
         const userForm = ref(
         {
             email: "",
@@ -43,7 +49,21 @@ export default
         });
         return {
             userForm,
-            onSubmit: async () => createuser(userForm.value)
+            onSubmit: async () =>
+            {
+                const
+                {
+                    ok,
+                    message
+                } = await createuser(userForm.value);
+                // Mensaje en error
+                if (!ok) alert(message)
+                else
+                {
+                    alert("Creado correctamente");
+                    router.push("/daybook/empty-entry");
+                }
+            }
         };
     }
 
