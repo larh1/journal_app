@@ -3,6 +3,7 @@ import authRouter from "@/modules/auth/router";
 import { createRouter, createWebHashHistory } from "vue-router";
 
 import HomeView from "../views/HomeView.vue";
+import isAuthenticated from "@/modules/auth/router/auth-guard";
 
 const routes = [
   {
@@ -16,6 +17,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   {
+    beforeEnter:[isAuthenticated],
     path: '/daybook',
     ...daybookRouter
   },

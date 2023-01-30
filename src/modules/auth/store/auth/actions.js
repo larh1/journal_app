@@ -57,7 +57,6 @@ export const checkToken = async (context) =>
     {
         // Comprobar token
         const {data} = await authApi.post(":lookup",{idToken});
-        console.error(data);
         const user = {
             name: data.users[0].name,
             email: data.users[0].email

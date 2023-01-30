@@ -1,4 +1,4 @@
-// export const myGetter=(state)=>
-// {
-    // return state.algo
-// }
+export const getStatus = (state) =>
+{
+    return state.status;
+}
