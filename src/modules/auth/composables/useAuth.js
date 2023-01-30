@@ -11,13 +11,20 @@ const useAuth = () =>
 
     const loginUser = (user) =>
     {
-        const res=store.dispatch("auth/loginUser",user);
+        const res = store.dispatch("auth/loginUser",user);
+        return res;
+    }
+
+    const checkToken = async () =>
+    {
+        const res = await store.dispatch("auth/checkToken",user);
         return res;
     }
     // Props
     return {
         createuser,
-        loginUser
+        loginUser,
+        checkToken
     }
 }
 

@@ -10,3 +10,12 @@ export const loginUser = (state,{user,idToken,refreshToken}) =>
     state.user = user;
     state.status = 1;
 }
+
+export const logOut = (state) =>
+{
+    state.status = 0;
+    state.user = null;
+    state.idToken = null;
+    state.refreshToken = null;
+    localStorage.removeItem("idToken");
+}

@@ -34,7 +34,7 @@ export const loginUser = async (context,user) =>
             returnSecureToken: true
         });
         delete user.pasw;
-        user.name=data.displayName;
+        user.name = data.displayName;
         // Guardar token
         context.commit("loginUser",
             {user,idToken: data.idToken,refreshToken: data.refreshToken});
@@ -42,5 +42,31 @@ export const loginUser = async (context,user) =>
     } catch (ex)
     {
         return {ok: false,message: ex.response.data.error.message}
+    }
+}
+
+export const checkToken = async (context) =>
+{
+    const idToken = localStorage.getItem("idToken");
+    if (!idToken)
+    {
+        context.commit("logOut");
+        return {ok: false,message: "403. Not authenticated"};
+    }
+    try
+    {
+        // Comprobar token
+        const {data} = await authApi.post(":lookup",{idToken});
+        console.error(data);
+        const user = {
+            name: data.users[0].name,
+            email: data.users[0].email
+        };
+        context.commit("loginUser",{user,idToken})
+        return {ok: true}
+    } catch (ex)
+    {
+        context.commit("logOut");
+        return {ok: false,message: ex.response.data.error.message};
     }
 }
