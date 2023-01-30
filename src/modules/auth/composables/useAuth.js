@@ -21,12 +21,19 @@ const useAuth = () =>
         const res = await store.dispatch("auth/checkToken");
         return res;
     }
+
     // Props
     return {
         createuser,
         loginUser,
         checkToken,
-        authStatus: computed(() => store.getters["getStatus"])
+        authStatus: computed(() => store.getters["auth/getStatus"]),
+        userName: computed(() => store.getters["auth/getUserName"]),
+        logOut: () =>
+        {
+            store.commit("auth/logOut");
+            store.commit("journal/clearEntries");
+        },
     }
 }
 

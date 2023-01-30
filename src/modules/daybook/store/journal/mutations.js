@@ -8,7 +8,7 @@ export const updateEntry = (state,entry) =>
 {
     // Obtener la posicion del index actualizado
     let index = state.entries.map(e => e.id).indexOf(entry.id);
-    state.entries[index]=entry;
+    state.entries[index] = entry;
 }
 
 export const createEntry = (state,entry) =>
@@ -18,6 +18,11 @@ export const createEntry = (state,entry) =>
 
 export const deleteEntry = (state,id) =>
 {
-    const idx=state.entries.map(r=>r.id).indexOf(id);
+    const idx = state.entries.map(r => r.id).indexOf(id);
     state.entries.splice(idx,1);
+}
+
+export const clearEntries = (state) =>
+{
+    state.entries = [];
 }
