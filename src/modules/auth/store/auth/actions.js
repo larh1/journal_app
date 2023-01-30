@@ -9,12 +9,14 @@ export const createUser = async (context,user) =>
             password: user.pasw,
             returnSecureToken: true
         });
-        console.error({data});
         // Actualizar nombre del usuario
         // const {idToken,refreshToken} = data; // Obtener Token
         // await authApi.post(":update",{displayName: user.name,idToken});
-        
-        //TODO: Hacer mutation
+
+        delete user.pasw; // Borrar pass del obj usuario
+        context.commit("loginUser",
+            {user,idToken: data.idToken,refreshToken: data.refreshToken});
+
         return {ok: true}
     } catch (ex)
     {
