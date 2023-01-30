@@ -10,13 +10,34 @@ export const createUser = async (context,user) =>
             returnSecureToken: true
         });
         // Actualizar nombre del usuario
-        // const {idToken,refreshToken} = data; // Obtener Token
-        // await authApi.post(":update",{displayName: user.name,idToken});
+        const {idToken,refreshToken} = data; // Obtener Token
+        await authApi.post(":update",{displayName: user.name,idToken});
 
         delete user.pasw; // Borrar pass del obj usuario
         context.commit("loginUser",
             {user,idToken: data.idToken,refreshToken: data.refreshToken});
 
+        return {ok: true}
+    } catch (ex)
+    {
+        return {ok: false,message: ex.response.data.error.message}
+    }
+}
+
+export const loginUser = async (context,user) =>
+{
+    try
+    {
+        const {data} = await authApi.post(":signInWithPassword",{
+            email: user.email,
+            password: user.pasw,
+            returnSecureToken: true
+        });
+        delete user.pasw;
+        user.name=data.displayName;
+        // Guardar token
+        context.commit("loginUser",
+            {user,idToken: data.idToken,refreshToken: data.refreshToken});
         return {ok: true}
     } catch (ex)
     {

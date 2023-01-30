@@ -43,9 +43,9 @@ export default
         const router = useRouter();
         const userForm = ref(
         {
-            email: "",
-            name: "",
-            pasw: "",
+            email: "asd@asd.com",
+            name: "Yolo123",
+            pasw: "123456",
         });
         return {
             userForm,

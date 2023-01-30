@@ -5,12 +5,19 @@ const useAuth = () =>
     const store = useStore();
     const createuser = async (user) =>
     {
-        const res=store.dispatch("auth/createUser",user);
+        const res = store.dispatch("auth/createUser",user);
+        return res;
+    }
+
+    const loginUser = (user) =>
+    {
+        const res=store.dispatch("auth/loginUser",user);
         return res;
     }
     // Props
     return {
-        createuser
+        createuser,
+        loginUser
     }
 }
 
