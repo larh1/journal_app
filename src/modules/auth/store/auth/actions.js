@@ -10,6 +10,10 @@ export const createUser = async (context,user) =>
             returnSecureToken: true
         });
         console.error({data});
+        // Actualizar nombre del usuario
+        // const {idToken,refreshToken} = data; // Obtener Token
+        // await authApi.post(":update",{displayName: user.name,idToken});
+        
         //TODO: Hacer mutation
         return {ok: true}
     } catch (ex)
