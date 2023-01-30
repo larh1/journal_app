@@ -6,4 +6,13 @@ const journalApi = axios.create(
     }
 );
 
+journalApi.interceptors.request.use((config) =>
+{
+    // Agregar token a las request
+    config.params = {
+        auth: localStorage.getItem("idToken")
+    }
+    return config; // IMPORTANTE
+});
+
 export default journalApi;
