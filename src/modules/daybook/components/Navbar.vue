@@ -2,8 +2,8 @@
 <!-- Navbar -->
 <nav class="navbar bg-primary">
     <a class="navbar-brand text-white">
-        <img src="@/assets/logo.png" alt="Logo" class="d-inline-block align-text-top mx-2" height="25">
-        <span>{{userName}}</span>
+        <img src="@/assets/libro.png" alt="Logo" class="d-inline-block mx-2" height="25">
+        <span class="mt-1">Journal App</span>
     </a>
     <button class="btn btn-outline-info mx-2" @click="onLogOut">
         <i class="fa-solid fa-right-from-bracket"></i>
