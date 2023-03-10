@@ -1,5 +1,5 @@
 <template>
-<div class="main">
+<div class="">
     <router-view></router-view>
 </div>
 </template>
@@ -12,5 +12,8 @@ export default
 </script>
 
 <style scoped>
-@import "../assets/style.css";
+body
+{
+    background-color: #2c3e50;
+}
 </style>
